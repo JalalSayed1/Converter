@@ -2,24 +2,24 @@ from moviepy.editor import *
 import os
 import sys
 
-# Replace input_file_path and output_file_path with the paths to your input and output files
-# get file name from cmd line:
-input_file = sys.argv[1]
-# check if file exists:
-if not os.path.isfile(input_file):
-    print("File does not exist")
-    sys.exit(1)
+# get all .mp4 files in the 'files' folder and put them in a list:
+files_paths = [os.path.join('files', file) for file in os.listdir('files') if file.endswith('.mp4')]
 
-# output file name is the same as input file name with .mp3 extension
-output_file= input_file[:-4] + ".mp3"
+print('Files to found:')
+for file in files_paths:
+    print(f'    {file}')
 
-# Load the video file
-video = VideoFileClip(input_file)
+for input_file_path in files_paths:
+    # output file name is the same as input file name with .mp3 extension
+    output_file_path = input_file_path[:-4] + ".mp3"
 
-# Extract the audio from the video and save it as an mp3 file
-audio = video.audio
-audio.write_audiofile(output_file)
+    # Load the video file
+    video = VideoFileClip(input_file_path)
 
-# Close the video and audio files
-video.close()
-audio.close()
+    # Extract the audio from the video and save it as an mp3 file
+    audio = video.audio
+    audio.write_audiofile(output_file_path)
+
+    # Close the video and audio files
+    video.close()
+    audio.close()
