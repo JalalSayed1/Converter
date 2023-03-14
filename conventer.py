@@ -9,7 +9,7 @@ files_paths = [os.path.join('files', file) for file in os.listdir('files') if fi
 files_paths.sort(key=os.path.getsize)
 
 print('Files to found (sorted according to file size):')
-      for file in files_paths:
+for file in files_paths:
     # print filename and size:
     print(f'    {file}')
 
